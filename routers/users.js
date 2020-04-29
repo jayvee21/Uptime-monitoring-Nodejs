@@ -26,13 +26,7 @@ router.post('/', function(req, res){
 // Get the user
 router.get('/', tokenVerifier.checkToken, function(req, res){
     userHandler.get(req, function(statusCode, payload){
-        statusCode = typeof(statusCode) == 'number' ? statusCode : 200
-        payload = typeof(payload) == 'object' ? payload : {}
-        var payloadString = JSON.stringify( payload )
-        // Return the response
-        res.setHeader('Content-type','application/json')
-        res.writeHead(statusCode)
-        res.end(payloadString)
+        helpers.handleServerResponse(res, statusCode, payload)
     })
 })
 
@@ -42,13 +36,7 @@ router.get('/', tokenVerifier.checkToken, function(req, res){
 
 router.put('/', tokenVerifier.checkToken, function(req, res){
     userHandler.update(req, function(statusCode, payload){
-        statusCode = typeof(statusCode) == 'number' ? statusCode : 200
-        payload = typeof(payload) == 'object' ? payload : {}
-        var payloadString = JSON.stringify( payload )
-        // Return the response
-        res.setHeader('Content-type','application/json')
-        res.writeHead(statusCode)
-        res.end(payloadString)
+        helpers.handleServerResponse(res, statusCode, payload)
     })
 })
 
@@ -58,13 +46,7 @@ router.put('/', tokenVerifier.checkToken, function(req, res){
  */
 router.delete('/', tokenVerifier.checkToken, function(req, res){
     userHandler.delete(req, function(statusCode, payload){
-        statusCode = typeof(statusCode) == 'number' ? statusCode : 200
-        payload = typeof(payload) == 'object' ? payload : {}
-        var payloadString = JSON.stringify( payload )
-        // Return the response
-        res.setHeader('Content-type','application/json')
-        res.writeHead(statusCode)
-        res.end(payloadString)
+        helpers.handleServerResponse(res, statusCode, payload)
     })
 })
 
