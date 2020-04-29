@@ -7,7 +7,7 @@ let express = require('express')
 let router = express.Router()
 var userHandler = require('../lib/usersHandler')
 var tokenVerifier = require('./../middleware/tokenVerifier')
-
+var helpers = require('./../lib/helpers')
 
 
 
@@ -18,13 +18,7 @@ var tokenVerifier = require('./../middleware/tokenVerifier')
 router.post('/', function(req, res){
 
     userHandler.create( req.body, req.headers, function(statusCode, payload){
-        statusCode = typeof(statusCode) == 'number' ? statusCode : 200
-        payload = typeof(payload) == 'object' ? payload : {}
-        var payloadString = JSON.stringify( payload )
-        // Return the response
-        res.setHeader('Content-type','application/json')
-        res.writeHead(statusCode)
-        res.end(payloadString)
+        helpers.handleServerResponse(res, statusCode, payload)
     })  
 
 })

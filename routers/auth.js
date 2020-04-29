@@ -4,6 +4,7 @@
 // Dependencies
 let express = require('express')
 let router = express.Router()
+let helpers = require('./../lib/helpers')
 
 var authHandler = require('./../lib/authHandler')
 
@@ -16,20 +17,20 @@ var authHandler = require('./../lib/authHandler')
 router.post('/login', function(req, res){
     
     authHandler.login( req, function( statusCode, payload ){
-        handleServerResponse( res, statusCode, payload )
+        helpers.handleServerResponse( res, statusCode, payload )
     })
 
 })
 
-handleServerResponse = function(response, statusCode, payload ){
-    statusCode = typeof(statusCode) == 'number' ? statusCode : 200
-    payload = typeof(payload) == 'object' ? payload : {}
-    var payloadString = JSON.stringify( payload )
-    // Return the response
-    response.setHeader('Content-type','application/json')
-    response.writeHead(statusCode)
-    response.end(payloadString)
-}
+// handleServerResponse = function(response, statusCode, payload ){
+//     statusCode = typeof(statusCode) == 'number' ? statusCode : 200
+//     payload = typeof(payload) == 'object' ? payload : {}
+//     var payloadString = JSON.stringify( payload )
+//     // Return the response
+//     response.setHeader('Content-type','application/json')
+//     response.writeHead(statusCode)
+//     response.end(payloadString)
+// }
 
 
 
