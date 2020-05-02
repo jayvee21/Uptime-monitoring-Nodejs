@@ -17,9 +17,17 @@ router.post('/', tokenVerifier.checkToken, function( req, res ){
     })
 })
 
+/**
+ * List all user checks
+ */
+router.get('/', tokenVerifier.checkToken, function( req, res ){
+    checksHandler.list( req, function( statusCode, payload ){
+        helpers.handleServerResponse( res, statusCode, payload)
+    })
+})
 
 /**
- * View checks
+ * View checks record
  */
 router.get('/:checkId', tokenVerifier.checkToken, function(req, res){
     checksHandler.get( req, function( statusCode, payload){
