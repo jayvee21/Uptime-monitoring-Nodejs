@@ -28,6 +28,23 @@ router.get('/:checkId', tokenVerifier.checkToken, function(req, res){
 })
 
 
+/**
+ * Update a check
+ */
+router.put('/:checkId', tokenVerifier.checkToken, function( req, res ){
+    checksHandler.update( req, function (statusCode, payload){
+        helpers.handleServerResponse( res, statusCode, payload )
+    })
+})
+
+/**
+ * Delete a check
+ */
+router.delete('/:checkId', tokenVerifier.checkToken, function( req, res ){
+    checksHandler.delete( req, function(statusCode, payload){
+        helpers.handleServerResponse( res, statusCode, payload )
+    })
+})
 
 
 // Export the Router module
